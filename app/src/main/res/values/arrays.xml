@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="notification_times_array">
+        <item>Never</item>
+        <item>in 1 hour</item>
+        <item>in 6 hours</item>
+        <item>in 1 day</item>
+        <item>in 3 days</item>
+        <item>in 1 week</item>
+        <item>in 1 month</item>
+    </string-array>
+</resources>

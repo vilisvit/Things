@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:propertyName="backgroundColor"
+        android:valueFrom="?attr/colorSecondary"
+        android:valueTo="?attr/colorPrimary"
+        android:duration="500"/>
+
+    <objectAnimator
+        android:propertyName="backgroundColor"
+        android:valueFrom="?attr/colorPrimary"
+        android:valueTo="?attr/colorSecondary"
+        android:startOffset="500"/>
+</set>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/logo">
+    <target
+        android:animation="@animator/logo_top_element_animator"
+        android:name="topElement"/>
+    <target
+        android:animation="@animator/logo_bottom_element_animator"
+        android:name="bottomElement"/>
+    <target
+        android:animation="@animator/logo_middle_element_1_animator"
+        android:name="middleElement1"/>
+    <target
+        android:animation="@animator/logo_middle_element_2_animator"
+        android:name="middleElement2"/>
+
+</animated-vector>

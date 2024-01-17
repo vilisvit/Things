@@ -1,0 +1,166 @@
+[
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\menu_on_item_click_menu.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\menu\\on_item_click_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\menu_on_date_or_time_click_menu.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\menu\\on_date_or_time_click_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.vilisvit.things.app-merged_res-32:/animator_recycleview_row_highlight_animator.xml.flat",
+        "source": "com.vilisvit.things.app-main-34:/animator/recycleview_row_highlight_animator.xml"
+    },
+    {
+        "merged": "com.vilisvit.things.app-merged_res-32:/animator_logo_top_element_animator.xml.flat",
+        "source": "com.vilisvit.things.app-main-34:/animator/logo_top_element_animator.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\menu_main_activity_menu.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\menu\\main_activity_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\drawable_logo.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\drawable\\logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-hdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\animator_middle_element_1_animator.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\animator\\middle_element_1_animator.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\animator_middle_element_2_animator.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\animator\\middle_element_2_animator.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\drawable_animated_logo.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\drawable\\animated_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\color_text_color_selector_black.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\color\\text_color_selector_black.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\layout_recycle_view_row.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\layout\\recycle_view_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\animator_top_element_animator.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\animator\\top_element_animator.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\color_text_color_selector_white.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\color\\text_color_selector_white.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\layout_activity_edit.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\layout\\activity_edit.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\drawable_ic_add.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\drawable\\ic_add.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\animator_bottom_element_animator.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\animator\\bottom_element_animator.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\layout_recycle_view_row_old.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\layout\\recycle_view_row_old.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.vilisvit.things.app-merged_res-32:/drawable_animated_logo.xml.flat",
+        "source": "com.vilisvit.things.app-main-34:/drawable/animated_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.vilisvit.things.app-merged_res-32:/animator_logo_bottom_element_animator.xml.flat",
+        "source": "com.vilisvit.things.app-main-34:/animator/logo_bottom_element_animator.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.vilisvit.things.app-merged_res-32:/animator_logo_middle_element_2_animator.xml.flat",
+        "source": "com.vilisvit.things.app-main-34:/animator/logo_middle_element_2_animator.xml"
+    },
+    {
+        "merged": "com.vilisvit.things.app-merged_res-32:/animator_logo_middle_element_1_animator.xml.flat",
+        "source": "com.vilisvit.things.app-main-34:/animator/logo_middle_element_1_animator.xml"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-merged_res-32:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Vitalii\\.gradle\\daemon\\8.2\\com.vilisvit.things.app-main-34:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    }
+]

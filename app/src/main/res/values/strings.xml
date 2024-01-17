@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Things</string>
+    <string name="add_button_description">add</string>
+    <string name="edittext_title">Title</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="deadline">Deadline:</string>
+    <string name="added">Added:</string>
+    <string name="no_things">No things to do yet</string>
+    <string name="delete">Delete</string>
+    <string name="delete_value">Delete value</string>
+    <string name="notification">Notification:</string>
+    <string name="edit_thing">Edit thing</string>
+    <string name="delete_all">Delete all</string>
+</resources>

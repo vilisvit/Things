@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="notification_times_array">
+        <item>Never</item>
+        <item>in 1 hour</item>
+        <item>in 6 hours</item>
+        <item>in 1 day</item>
+        <item>in 3 days</item>
+        <item>in 1 week</item>
+        <item>in 1 month</item>
+    </string-array>
+    <color name="alpha_gray_black">#80000000</color>
+    <color name="alpha_gray_white">#80FFFFFF</color>
+    <color name="alpha_lightgray_black">#4D000000</color>
+    <color name="alpha_lightgray_white">#4DFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="blurple">#FF3F51B5</color>
+    <color name="dark_gray">#181819</color>
+    <color name="dark_green">#169637</color>
+    <color name="dark_green_background">#0A551D</color>
+    <color name="dark_purple">#FF4C00FF</color>
+    <color name="dark_purple_2">#FF8000FF</color>
+    <color name="gray">#FF666677</color>
+    <color name="green">#FF00FF00</color>
+    <color name="ic_launcher_background">#2AD50B</color>
+    <color name="light_gray">#FFDDDDDD</color>
+    <color name="light_green">#87FF66</color>
+    <color name="light_green_background">#CFFFDB</color>
+    <color name="light_purple">#FFAFA2FF</color>
+    <color name="light_purple_2">#FFCBAAFF</color>
+    <color name="main_dark_green">#007700</color>
+    <color name="main_green">#2AD50B</color>
+    <color name="red">#FFFF0000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_gray">#F4F4F4</color>
+    <string name="add_button_description">add</string>
+    <string name="added">Added:</string>
+    <string name="app_name">Things</string>
+    <string name="date">Date</string>
+    <string name="deadline">Deadline:</string>
+    <string name="delete">Delete</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_value">Delete value</string>
+    <string name="description">Description</string>
+    <string name="edit_thing">Edit thing</string>
+    <string name="edittext_title">Title</string>
+    <string name="no_things">No things to do yet</string>
+    <string name="notification">Notification:</string>
+    <string name="save">Save</string>
+    <string name="time">Time</string>
+    <style name="Base.Theme.Things" parent="Theme.Material3.Light">
+        <item name="colorPrimary">@color/main_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:textColor">@color/text_color_selector_black</item>
+        <item name="android:textColorHint">@color/alpha_gray_black</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="android:colorBackground">@color/light_green_background</item>
+        <item name="toolbarStyle">@style/Base.Theme.Things.Toolbar.Light</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="backgroundTint">@color/black</item>
+    </style>
+    <style name="Base.Theme.Things.Toolbar.Light" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/light_green</item>
+    </style>
+    <style name="CustomDateTimePickerDialogStyle" parent="Theme.Material3.Light.Dialog">
+        <item name="colorAccent">@color/main_green</item>
+        <item name="android:colorControlActivated">@color/main_green</item>
+        <item name="colorOnPrimary">@color/main_green</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorSecondaryInverse">@color/white</item>
+    </style>
+    <style name="PopupMenu" parent="Widget.Material3.PopupMenu.Overflow">
+        <item name="android:popupBackground">@color/white_gray</item>
+        <item name="android:popupElevation">4dp</item>
+    </style>
+    <style name="Theme.Things" parent="Base.Theme.Things"/>
+    <style name="Theme.Things.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/main_green</item>
+        <item name="postSplashScreenTheme">@style/Theme.Things</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/animated_logo</item>
+        <item name="duration">5000</item>
+    </style>
+</resources>

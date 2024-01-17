@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.Things" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/dark_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/dark_gray</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:textColor">@color/text_color_selector_white</item>
+        <item name="android:textColorHint">@color/alpha_gray_white</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="android:colorBackground">@color/dark_green_background</item>
+        <item name="toolbarStyle">@style/Base.Theme.Things.Toolbar.Night</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Night</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+    <style name="Base.Theme.Things.Toolbar.Night" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/main_dark_green</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+    <style name="CustomDateTimePickerDialogStyle" parent="Theme.Material3.Dark.Dialog">
+        <item name="colorAccent">@color/dark_green</item>
+        <item name="android:colorControlActivated">@color/dark_green</item>
+        <item name="colorOnPrimary">@color/dark_green</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorSecondaryInverse">@color/white</item>
+    </style>
+    <style name="PopupMenu.Night" parent="Widget.Material3.PopupMenu.Overflow">
+        <item name="android:popupBackground">@color/white_gray</item>
+        <item name="android:popupElevation">4dp</item>
+    </style>
+    <style name="Theme.Things" parent="Base.Theme.Things"/>
+</resources>
