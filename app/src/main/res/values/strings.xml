@@ -14,4 +14,9 @@
     <string name="notification">Notification:</string>
     <string name="edit_thing">Edit thing</string>
     <string name="delete_all">Delete all</string>
+    <string name="priority">Priority:</string>
+    <string name="deadline_in_edit_view">Deadline</string>
+    <string name="low">Low</string>
+    <string name="middle">Middle</string>
+    <string name="high">High</string>
 </resources>

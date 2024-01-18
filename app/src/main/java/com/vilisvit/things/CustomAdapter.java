@@ -214,7 +214,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView title_text, description_text, datetime_added_text, datetime_text, dateStaticText;
+        TextView title_text, description_text, datetime_text, dateStaticText;
         CheckBox status_checkbox;
         LinearLayout mainLayout;
         ConstraintLayout itemConstraintLayout, datesTimesConstraintLayout;
@@ -222,7 +222,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             super(itemView);
             title_text = itemView.findViewById(R.id.titleText);
             description_text = itemView.findViewById(R.id.descriptionText);
-            datetime_added_text = itemView.findViewById(R.id.addedDateText);
             datetime_text = itemView.findViewById(R.id.deadlineDateText);
             status_checkbox = itemView.findViewById(R.id.checkBox);
             dateStaticText = itemView.findViewById(R.id.dateStaticText);

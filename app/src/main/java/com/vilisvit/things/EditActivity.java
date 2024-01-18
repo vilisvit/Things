@@ -74,7 +74,7 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-        descriptionInput = findViewById(R.id.editTextDescripton);
+        descriptionInput = findViewById(R.id.editTextDescription);
         editDate = findViewById(R.id.datePicker);
         editDate.setOnClickListener(new View.OnClickListener() {
             @Override
