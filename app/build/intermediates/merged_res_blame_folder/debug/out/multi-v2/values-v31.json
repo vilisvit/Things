@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vilisvit.things.app-mergeDebugResources-30:/values-v31/values-v31.xml",
+            "outputFile": "com.vilisvit.things.app-mergeDebugResources-51:/values-v31/values-v31.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Vitalii\\.gradle\\caches\\transforms-3\\c8d26ee408620b0f466b1e3bf1d00c1f\\transformed\\core-splashscreen-1.0.1\\res\\values-v31\\values-v31.xml",
