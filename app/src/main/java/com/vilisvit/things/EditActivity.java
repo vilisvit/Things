@@ -35,7 +35,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import android.Manifest;
+import android.widget.ToggleButton;
 
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.color.MaterialColors;
 
 import java.util.Calendar;
@@ -43,13 +45,12 @@ import java.util.Calendar;
 public class EditActivity extends AppCompatActivity {
 
     EditText titleInput, descriptionInput, editDate, editTime;
-
     String id, title, description, date="", time="", notification_time;
-
+    int priority;
     boolean isThingCompleted;
 
     String selectedDateTime;
-
+    MaterialButtonToggleGroup priorityToggleButton;
     Button saveButton;
     TextView notification_textView;
     AlarmManager alarmManager;
@@ -200,6 +201,8 @@ public class EditActivity extends AppCompatActivity {
         spinner.setEnabled(false);
         spinner.setSelection(0);
 
+        priorityToggleButton = findViewById(R.id.priorityToggleButton);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.notification_times_array,
@@ -232,7 +235,8 @@ public class EditActivity extends AppCompatActivity {
             title = getIntent().getStringExtra("title");
             description = getIntent().getStringExtra("description");
             String datetime = getIntent().getStringExtra("datetime");
-            isThingCompleted = getIntent().getExtras().getBoolean("status");
+            priority = getIntent().getIntExtra("priority", 0);
+            isThingCompleted = getIntent().getBooleanExtra("status", false);
             if (datetime != null && !datetime.isEmpty()) {
                 date = datetime.split(" ")[0];
                 try {
@@ -267,6 +271,14 @@ public class EditActivity extends AppCompatActivity {
 
     private void saveData() {
         MyDatabaseHelper myDBHelper = new MyDatabaseHelper(EditActivity.this);
+        int checkedId = priorityToggleButton.getCheckedButtonId();
+        if (checkedId == R.id.lowPriorityButton) {
+            priority = 0;
+        } else if (checkedId == R.id.mediumPriorityButton) {
+            priority = 1;
+        } else if (checkedId == R.id.highPriorityButton) {
+            priority = 2;
+        }
         if (editDate.getText().toString().isEmpty() && !editTime.getText().toString().isEmpty()) {
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
@@ -280,9 +292,9 @@ public class EditActivity extends AppCompatActivity {
                 if (permissionsGranted()) {
 
                     if (getIntent().hasExtra("id")) {
-                        myDBHelper.updateData(id, titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString());
+                        myDBHelper.updateData(id, titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority);
                     } else {
-                        id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), false));
+                        id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority, false));
                     }
 
                     notification_time = spinner.getSelectedItem().toString();
@@ -304,9 +316,9 @@ public class EditActivity extends AppCompatActivity {
             } else {
 
                 if (getIntent().hasExtra("id")) {
-                    myDBHelper.updateData(id, titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString());
+                    myDBHelper.updateData(id, titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority);
                 } else {
-                    id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), false));
+                    id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority, false));
                 }
                 Intent intent = new Intent(EditActivity.this, MainActivity.class);
                 startActivity(intent);

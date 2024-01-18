@@ -13,7 +13,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private final Context context;
     private static final String DATABASE_NAME = "ThingsDatabase.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public static final String TABLE_NAME = "things";
     public static final String COLUMN_ID = "_id";
@@ -22,6 +22,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DESCRIPTION = "thing_description";
     public static final String COLUMN_DATETIME = "thing_datetime";
     public static final String COLUMN_NOTIFICATION_TIME = "notification_time";
+    public static final String COLUMN_PRIORITY = "thing_priority";
     public static final String COLUMN_STATUS = "thing_status";
 
     public MyDatabaseHelper(@Nullable Context context) {
@@ -38,6 +39,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_DESCRIPTION + " TEXT, " +
                 COLUMN_DATETIME + " DATETIME, " +
                 COLUMN_NOTIFICATION_TIME + " TINYTEXT, " +
+                COLUMN_PRIORITY + " INTEGER, " +                 // 0-Low, 1-Medium, 2-High
                 COLUMN_STATUS + " BOOL);";
         db.execSQL(query);
     }
@@ -48,7 +50,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long addThing (String title, String description, String datetime, String notificationTime, boolean status) {
+    public long addThing (String title, String description, String datetime, String notificationTime, int priority, boolean status) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -56,6 +58,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DESCRIPTION, description);
         cv.put(COLUMN_DATETIME, datetime);
         cv.put(COLUMN_NOTIFICATION_TIME, notificationTime);
+        cv.put(COLUMN_PRIORITY, priority);
         cv.put(COLUMN_STATUS, status);
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1) {
@@ -64,13 +67,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public void updateData (String row_id, String title, String description, String datetime, String notificationTime) {
+    public void updateData (String row_id, String title, String description, String datetime, String notificationTime, int priority) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_DESCRIPTION, description);
         cv.put(COLUMN_DATETIME, datetime);
+        cv.put(COLUMN_PRIORITY, priority);
         cv.put(COLUMN_NOTIFICATION_TIME, notificationTime);
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if (result == -1) {

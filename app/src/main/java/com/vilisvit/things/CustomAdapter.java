@@ -1,7 +1,5 @@
 package com.vilisvit.things;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
@@ -10,20 +8,16 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -36,7 +30,7 @@ import java.util.Calendar;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private final Context context;
-    private final ArrayList ids, titles, descriptions, datetimes, notification_times, statuses;
+    private final ArrayList ids, titles, descriptions, datetimes, notification_times, priorities, statuses;
     private String highlighted_element_id;
 
     CustomAdapter (Context context,
@@ -45,6 +39,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                    ArrayList descriptions,
                    ArrayList datetimes,
                    ArrayList notification_times,
+                   ArrayList priorities,
                    ArrayList statuses) {
         this.context = context;
         this.ids = ids;
@@ -52,6 +47,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.descriptions = descriptions;
         this.datetimes = datetimes;
         this.notification_times = notification_times;
+        this.priorities = priorities;
         this.statuses = statuses;
     }
 
@@ -62,6 +58,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                    ArrayList datetimes,
                    ArrayList notification_times,
                    ArrayList statuses,
+                   ArrayList priorities,
                    String highlighted_element_id) {
         this.context = context;
         this.ids = ids;
@@ -69,6 +66,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.descriptions = descriptions;
         this.datetimes = datetimes;
         this.notification_times = notification_times;
+        this.priorities = priorities;
         this.statuses = statuses;
         this.highlighted_element_id = highlighted_element_id;
     }
@@ -114,6 +112,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("description", String.valueOf(descriptions.get(position)));
                 intent.putExtra("datetime", String.valueOf(datetimes.get(position)).trim());
                 intent.putExtra("notification_time", String.valueOf(notification_times.get(position)));
+                intent.putExtra("priority", (Integer) priorities.get(position));
                 intent.putExtra("status", (Boolean) statuses.get(position));
                 context.startActivity(intent);
             }
@@ -172,6 +171,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         if (ids.get(position).equals(highlighted_element_id)) {
             highlightItemView(holder.itemConstraintLayout);
         }
+        switch ((int) priorities.get(position)) {
+            case 0:
+                holder.priority_indication_line.setBackgroundColor(ContextCompat.getColor(context, R.color.low_priority));
+                break;
+            case 1:
+                holder.priority_indication_line.setBackgroundColor(ContextCompat.getColor(context, R.color.medium_priority));
+                break;
+            case 2:
+                holder.priority_indication_line.setBackgroundColor(ContextCompat.getColor(context, R.color.high_priority));
+                break;
+        }
     }
 
     void confirmDialogDeleting (int position) {
@@ -215,6 +225,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView title_text, description_text, datetime_text, dateStaticText;
+        View priority_indication_line;
         CheckBox status_checkbox;
         LinearLayout mainLayout;
         ConstraintLayout itemConstraintLayout, datesTimesConstraintLayout;
@@ -223,6 +234,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             title_text = itemView.findViewById(R.id.titleText);
             description_text = itemView.findViewById(R.id.descriptionText);
             datetime_text = itemView.findViewById(R.id.deadlineDateText);
+            priority_indication_line = itemView.findViewById(R.id.priorityIndicationLine);
             status_checkbox = itemView.findViewById(R.id.checkBox);
             dateStaticText = itemView.findViewById(R.id.dateStaticText);
             mainLayout = itemView.findViewById(R.id.mainLayout);
@@ -246,6 +258,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         descriptions.clear();
         datetimes.clear();
         notification_times.clear();
+        priorities.clear();
         statuses.clear();
         MainActivity mainActivity = (MainActivity) context;
         mainActivity.noData.setVisibility(View.VISIBLE);

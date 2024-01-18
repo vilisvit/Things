@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:autofillHints=""
         android:hint="@string/edittext_title"
@@ -58,33 +58,36 @@
             android:id="@+id/priorityTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:text="@string/priority"
             android:textSize="20sp"/>
 
         <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/priorityPicker"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:checkedButton="@+id/lowPriorityButton"
+            android:id="@+id/priorityToggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp">
+            android:layout_marginStart="16dp">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:id="@+id/lowPriorityButton"
-                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/low" />
 
-            <Button
-                android:id="@+id/middlePriorityButton"
-                style="?attr/materialButtonOutlinedStyle"
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:id="@+id/mediumPriorityButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/middle" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:id="@+id/highPriorityButton"
-                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/high" />
@@ -187,14 +190,14 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="24dp"
         android:layout_marginEnd="24dp"
         android:text="@string/save"
+        android:layout_marginTop="24dp"
         android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

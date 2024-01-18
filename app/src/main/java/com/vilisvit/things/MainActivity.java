@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MyDatabaseHelper myDatabaseHelper;
     private ArrayList<String> ids, datetimes_added, titles, descriptions, datetimes, notification_times;
+    private ArrayList<Integer> priorities;
     private ArrayList<Boolean> statuses;
     private CustomAdapter customAdapter;
 
@@ -60,14 +61,15 @@ public class MainActivity extends AppCompatActivity {
         descriptions = new ArrayList<>();
         datetimes = new ArrayList<>();
         notification_times = new ArrayList<>();
+        priorities = new ArrayList<>();
         statuses = new ArrayList<>();
 
         storeDataInArrays();
 
         if (getIntent().hasExtra("highlighted_element_id")) {
-            customAdapter = new CustomAdapter(MainActivity.this, ids, titles, descriptions, datetimes, notification_times, statuses, getIntent().getStringExtra("highlighted_element_id"));
+            customAdapter = new CustomAdapter(MainActivity.this, ids, titles, descriptions, datetimes, notification_times, priorities, statuses, getIntent().getStringExtra("highlighted_element_id"));
         } else {
-            customAdapter = new CustomAdapter(MainActivity.this, ids, titles, descriptions, datetimes, notification_times, statuses);
+            customAdapter = new CustomAdapter(MainActivity.this, ids, titles, descriptions, datetimes, notification_times, priorities, statuses);
         }
 
         recyclerView.setAdapter(customAdapter);
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 descriptions.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_DESCRIPTION)));
                 datetimes.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_DATETIME)));
                 notification_times.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_NOTIFICATION_TIME)));
+                priorities.add(cursor.getInt(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_PRIORITY)));
                 statuses.add(cursor.getInt(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_STATUS))>0);
             }
         }

@@ -1,10 +1,13 @@
-#Wed Jan 17 18:46:34 CET 2024
+#Thu Jan 18 13:11:13 CET 2024
 base.0=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.3=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=6/classes.dex
+path.3=classes2.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.2=classes3.dex
+renamed.3=classes4.dex

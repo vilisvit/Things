@@ -28,7 +28,7 @@
     <color name="main_dark_green">#007700</color>
     <color name="dark_green_background">#0A551D</color>
 
-    <color name="high_importance">#B31312</color>
-    <color name="medium_importance">#CC8212</color>
-    <color name="low_importance">#1450CA</color>
+    <color name="high_priority">#B31312</color>
+    <color name="medium_priority">#CC8212</color>
+    <color name="low_priority">#1450CA</color>
 </resources>

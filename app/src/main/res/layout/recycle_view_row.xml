@@ -23,10 +23,10 @@
             android:layout_height="wrap_content">
 
             <View
-                android:id="@+id/verticalLine"
+                android:id="@+id/priorityIndicationLine"
                 android:layout_width="13dp"
                 android:layout_height="match_parent"
-                android:background="@color/low_importance"
+                android:background="@color/low_priority"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
