@@ -30,7 +30,7 @@
         <item name="android:textColorSecondaryInverse">@color/white</item>
     </style>
     <style name="PopupMenu.Night" parent="Widget.Material3.PopupMenu.Overflow">
-        <item name="android:popupBackground">@color/white_gray</item>
+        <item name="android:popupBackground">@color/dark_gray</item>
         <item name="android:popupElevation">4dp</item>
     </style>
     <style name="Theme.Things" parent="Base.Theme.Things"/>

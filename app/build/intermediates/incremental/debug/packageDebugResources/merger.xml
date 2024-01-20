@@ -25,7 +25,7 @@
     </style><style name="Base.Theme.Things.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:background">@color/light_green</item>
     </style></file><file path="D:\Personal\Vitalii\AndroidStudio\Things\app\src\main\res\values-night\themes.xml" qualifiers="night-v8"><style name="Theme.Things" parent="Base.Theme.Things"/><style name="PopupMenu.Night" parent="Widget.Material3.PopupMenu.Overflow">
-        <item name="android:popupBackground">@color/white_gray</item>
+        <item name="android:popupBackground">@color/dark_gray</item>
         <item name="android:popupElevation">4dp</item>
     </style><style name="Base.Theme.Things" parent="Theme.Material3.Dark">
         <item name="colorPrimary">@color/dark_green</item>

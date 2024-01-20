@@ -30,29 +30,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private final Context context;
     MyViewHolder holderParent;
     CustomAdapter parentRecyclerViewAdapter;
-    private final ArrayList ids, titles, descriptions, datetimes, notification_times, priorities, statuses, parent_ids;
-    private String highlighted_element_id;
+    RecyclerView recyclerView;
+    private final ArrayList<String> ids, titles, descriptions, datetimes, notification_times, parent_ids;
+    private  final ArrayList<Integer> priorities;
+    private final ArrayList<Boolean> statuses;
+    private String highlighted_element_id, highlighted_element_parent_id;
 
-    private int row_layout_id;
+    private final int row_layout_id;
 
     CustomAdapter (Context context,
                    int row_layout_id,
                    MyViewHolder holderParent,
                    CustomAdapter parentRecyclerViewAdapter,
-                   ArrayList ids,
-                   ArrayList titles,
-                   ArrayList descriptions,
-                   ArrayList datetimes,
-                   ArrayList notification_times,
-                   ArrayList priorities,
-                   ArrayList statuses,
-                   ArrayList parent_ids) {
+                   ArrayList<String> ids,
+                   ArrayList<String> titles,
+                   ArrayList<String> descriptions,
+                   ArrayList<String> datetimes,
+                   ArrayList<String> notification_times,
+                   ArrayList<Integer> priorities,
+                   ArrayList<Boolean> statuses,
+                   ArrayList<String> parent_ids) {
         this.context = context;
         this.row_layout_id = row_layout_id;
         this.holderParent = holderParent;
@@ -71,14 +75,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                    int row_layout_id,
                    MyViewHolder holderParent,
                    CustomAdapter parentRecyclerViewAdapter,
-                   ArrayList ids,
-                   ArrayList titles,
-                   ArrayList descriptions,
-                   ArrayList datetimes,
-                   ArrayList notification_times,
-                   ArrayList statuses,
-                   ArrayList priorities,
-                   ArrayList parent_ids,
+                   ArrayList<String> ids,
+                   ArrayList<String> titles,
+                   ArrayList<String> descriptions,
+                   ArrayList<String> datetimes,
+                   ArrayList<String> notification_times,
+                   ArrayList<Integer> priorities,
+                   ArrayList<Boolean> statuses,
+                   ArrayList<String> parent_ids,
                    String highlighted_element_id) {
         this.context = context;
         this.row_layout_id = row_layout_id;
@@ -95,7 +99,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.highlighted_element_id = highlighted_element_id;
     }
 
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        this.recyclerView = recyclerView;
 
+        if (highlighted_element_id != null && !ids.contains(highlighted_element_id)) {
+            MyDatabaseHelper myDBHelper = new MyDatabaseHelper(context);
+            highlighted_element_parent_id = myDBHelper.getParentId(highlighted_element_id);
+            recyclerView.getLayoutManager().scrollToPosition(ids.indexOf(highlighted_element_parent_id));
+        }
+    }
 
     @NonNull
     @Override
@@ -108,7 +122,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @SuppressLint("Range")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if ((Boolean) statuses.get(position)) {
+        if (statuses.get(position)) {
             holder.title_text.setEnabled(false);
             holder.description_text.setEnabled(false);
             holder.datetime_text.setEnabled(false);
@@ -126,7 +140,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         if (String.valueOf(datetimes.get(position)).trim().isEmpty()) {
             holder.datesTimesConstraintLayout.setVisibility(View.GONE);
         }
-        holder.status_checkbox.setChecked((Boolean) statuses.get(position));
+        holder.status_checkbox.setChecked(statuses.get(position));
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,8 +151,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("description", String.valueOf(descriptions.get(position)));
                 intent.putExtra("datetime", String.valueOf(datetimes.get(position)).trim());
                 intent.putExtra("notification_time", String.valueOf(notification_times.get(position)));
-                intent.putExtra("priority", (Integer) priorities.get(position));
-                intent.putExtra("status", (Boolean) statuses.get(position));
+                intent.putExtra("priority", priorities.get(position));
+                intent.putExtra("status", statuses.get(position));
                 intent.putExtra("parent_id", String.valueOf(parent_ids.get(position)));
                 context.startActivity(intent);
             }
@@ -201,7 +215,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                         Calendar currentDatetime = Calendar.getInstance();
                         currentDatetime.add(Calendar.MINUTE, -1);
                         if (alarmDatetime.after(currentDatetime)) {
-                            alarmHelper.startAlarm(alarmDatetime, String.valueOf(ids.get(position)), String.valueOf(titles.get(position)), String.valueOf(datetimes.get(position)).trim());
+                            alarmHelper.startAlarm(alarmDatetime, String.valueOf(ids.get(position)), String.valueOf(titles.get(position)), String.valueOf(datetimes.get(position)).trim(), priorities.get(position));
                         }
                     }
                 }
@@ -225,9 +239,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }
 
         if (ids.get(position).equals(highlighted_element_id)) {
+            recyclerView.getLayoutManager().scrollToPosition(position);
             highlightItemView(holder.itemConstraintLayout);
         }
-        switch ((int) priorities.get(position)) {
+
+        if (ids.get(position).equals(highlighted_element_parent_id)) {
+            if (holder.expand_button != null) {
+                holder.expand_button.setRotation(180);
+            } else {
+                Log.e("error", "Expand button not found");
+            }
+            holder.recycler_view_children.setVisibility(View.VISIBLE);
+        }
+
+        switch (priorities.get(position)) {
             case 0:
                 holder.priority_indication_line.setBackgroundColor(ContextCompat.getColor(context, R.color.low_priority));
                 break;
@@ -242,13 +267,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         if (holder.recycler_view_children != null) {
             if (myDBHelper.countChildren(String.valueOf(ids.get(position))) > 0) {
                 ArrayList<String> children_ids = myDBHelper.getChildrenIds(String.valueOf(ids.get(position)));
-                ArrayList<String> children_titles = new ArrayList<String>();
-                ArrayList<String> children_descriptions = new ArrayList<String>();
-                ArrayList<String> children_datetimes = new ArrayList<String>();
-                ArrayList<String> children_notification_times = new ArrayList<String>();
-                ArrayList<Integer> children_priorities = new ArrayList<Integer>();
-                ArrayList<Boolean> children_statuses = new ArrayList<Boolean>();
-                ArrayList<String> children_parent_ids = new ArrayList<String>();
+                ArrayList<String> children_titles = new ArrayList<>();
+                ArrayList<String> children_descriptions = new ArrayList<>();
+                ArrayList<String> children_datetimes = new ArrayList<>();
+                ArrayList<String> children_notification_times = new ArrayList<>();
+                ArrayList<Integer> children_priorities = new ArrayList<>();
+                ArrayList<Boolean> children_statuses = new ArrayList<>();
+                ArrayList<String> children_parent_ids = new ArrayList<>();
 
                 Cursor cursor = myDBHelper.readDataForIds(children_ids);
                 cursor.moveToFirst();
@@ -262,10 +287,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     children_parent_ids.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_PARENT_ID)));
                 } while (cursor.moveToNext());
 
-                CustomAdapter childrenAdapter = new CustomAdapter(context, R.layout.recycle_view_row_child, holder, CustomAdapter.this, children_ids, children_titles, children_descriptions, children_datetimes, children_notification_times, children_priorities, children_statuses, children_parent_ids);
+                CustomAdapter childrenAdapter = new CustomAdapter(context, R.layout.recycle_view_row_child, holder, CustomAdapter.this, children_ids, children_titles, children_descriptions, children_datetimes, children_notification_times, children_priorities, children_statuses, children_parent_ids, highlighted_element_id);
 
-                holder.recycler_view_children.setAdapter(childrenAdapter);
                 holder.recycler_view_children.setLayoutManager(new LinearLayoutManager(context));
+                holder.recycler_view_children.setAdapter(childrenAdapter);
             } else {
                 holder.recycler_view_children.setVisibility(View.GONE);
                 holder.expand_button.setVisibility(View.GONE);
@@ -303,10 +328,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 notifyItemRangeChanged(position, getItemCount());
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {}
-        });
+        builder.setNegativeButton("No", (dialog, which) -> {});
         builder.create().show();
     }
 

@@ -1,5 +1,6 @@
 package com.vilisvit.things;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -188,6 +189,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
 
         return cursor;
+    }
+
+    @SuppressLint("Range")
+    public String getParentId (String row_id) {
+        ArrayList<String> ids = new ArrayList<>();
+        ids.add(row_id);
+        Cursor cursor = readDataForIds(ids);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_PARENT_ID));
     }
 
 }

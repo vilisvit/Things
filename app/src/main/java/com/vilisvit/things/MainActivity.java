@@ -22,12 +22,11 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     public TextView noData;
-    private FloatingActionButton floatingActionButton;
 
     private MyDatabaseHelper myDatabaseHelper;
     private ArrayList<String> ids, titles, descriptions, datetimes, notification_times, parent_ids;
@@ -41,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         noData=findViewById(R.id.noDataTextview);
-        floatingActionButton = findViewById(R.id.add_button);
+        FloatingActionButton floatingActionButton = findViewById(R.id.add_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,13 +70,9 @@ public class MainActivity extends AppCompatActivity {
             customAdapter = new CustomAdapter(MainActivity.this, R.layout.recycle_view_row, null, null, ids, titles, descriptions, datetimes, notification_times, priorities, statuses, parent_ids);
         }
 
+        recyclerView.setLayoutManager( new LinearLayoutManager(MainActivity.this));
         recyclerView.setAdapter(customAdapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        recyclerView.setLayoutManager( new LinearLayoutManager(MainActivity.this));
-
-        if (getIntent().hasExtra("highlighted_element_id")) {
-            recyclerView.getLayoutManager().scrollToPosition(ids.indexOf(getIntent().getStringExtra("highlighted_element_id")));
-        }
     }
 
     @SuppressLint("Range")
@@ -122,11 +117,8 @@ public class MainActivity extends AppCompatActivity {
                     customAdapter.deleteAllData();
                 }
             });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            builder.setNegativeButton("No", (dialog, which) -> {
 
-                }
             });
             builder.create().show();
         }

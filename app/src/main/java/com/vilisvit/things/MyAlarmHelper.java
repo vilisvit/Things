@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -43,7 +41,7 @@ public class MyAlarmHelper {
         alarmDatetime.set(Calendar.HOUR_OF_DAY, hour);
         alarmDatetime.set(Calendar.MINUTE, minute);
         alarmDatetime.set(Calendar.SECOND, 0);
-        /*
+
         switch (delay) {
             case "in 1 hour":
                 alarmDatetime.add(Calendar.HOUR_OF_DAY, -1);
@@ -65,19 +63,18 @@ public class MyAlarmHelper {
                 break;
 
         }
-        */
+
         //Toast.makeText(context, "Notification will be shown at: " + alarmDatetime.getTime(), Toast.LENGTH_SHORT).show();
         return alarmDatetime;
     }
 
-    public void startAlarm(Calendar calendar, String id, String title, String datetime) {
+    public void startAlarm(Calendar calendar, String id, String title, String datetime, int priority) {
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("id", id);
         intent.putExtra("title", title);
         intent.putExtra("datetime", datetime);
-
-        Log.d("intent_extra", "put extra - id: " + id + ", title: " + title + ", datetime: " + datetime);
+        intent.putExtra("priority", priority);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, Integer.parseInt(id), intent, PendingIntent.FLAG_MUTABLE);
         if (Build.VERSION.SDK_INT >= 31 && alarmManager.canScheduleExactAlarms()) {

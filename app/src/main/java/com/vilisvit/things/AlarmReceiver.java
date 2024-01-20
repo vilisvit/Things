@@ -21,12 +21,13 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         String channelID = "All";
         String title = "Title", datetime = "01-01-1900", id = "1";
+        int priority = 0;
 
         if (intent.hasExtra("id")) {
             id = intent.getStringExtra("id");
             title = intent.getStringExtra("title");
             datetime = intent.getStringExtra("datetime");
-            Log.d("intent_extra", "received extra - id: " + id + ", title: " + title + ", datetime: " + datetime);
+            priority = intent.getIntExtra("priority", 0);
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelID)
@@ -34,7 +35,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentTitle(title)
                 .setContentText(datetime)
                 .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setPriority(priority);
         Intent intent1 = new Intent(context, MainActivity.class);
         intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent1.putExtra("highlighted_element_id", id);

@@ -35,13 +35,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import android.Manifest;
-import android.widget.ToggleButton;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.color.MaterialColors;
 
 import java.util.Calendar;
-import java.util.Set;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -311,7 +309,7 @@ public class EditActivity extends AppCompatActivity {
                     Calendar currentDatetime = Calendar.getInstance();
                     currentDatetime.add(Calendar.MINUTE, -1);
                     if (alarmDatetime.after(currentDatetime)) {
-                        alarmHelper.startAlarm(alarmDatetime, id, titleInput.getText().toString().trim(), selectedDateTime);
+                        alarmHelper.startAlarm(alarmDatetime, id, titleInput.getText().toString().trim(), selectedDateTime, priority);
                     }
 
                     Intent intent = new Intent(EditActivity.this, MainActivity.class);
@@ -402,15 +400,4 @@ public class EditActivity extends AppCompatActivity {
             }
         }
     }
-    /*
-    @Override
-    public void onRequestPermissionsResult (int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if (requestCode == POST_NOTIFICATIONS_REQUEST_CODE) {
-                Log.d("permissions", "post notifications permission granted");
-            }
-        }
-    }
-    */
 }
