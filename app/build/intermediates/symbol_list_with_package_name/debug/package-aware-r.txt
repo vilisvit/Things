@@ -43,6 +43,8 @@ anim m3_side_sheet_exit_to_right
 anim mtrl_bottom_sheet_slide_in
 anim mtrl_bottom_sheet_slide_out
 anim mtrl_card_lowers_interpolator
+anim nested_recycleview_down
+anim nested_recycleview_up
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -3016,6 +3018,8 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable animated_logo
+drawable arrow_down
+drawable arrow_up
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -3260,6 +3264,7 @@ id coordinator
 id cos
 id counterclockwise
 id cradle
+id create_child_option
 id currentState
 id custom
 id customPanel
@@ -3275,6 +3280,7 @@ id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
 id delete_all_option
+id delete_children_option
 id delete_date_or_time_option
 id delete_option
 id deltaRelative
@@ -3317,6 +3323,7 @@ id endToStart
 id enterAlways
 id enterAlwaysCollapsed
 id exitUntilCollapsed
+id expandButton
 id expand_activities_button
 id expanded_menu
 id fade
@@ -3512,6 +3519,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id recyclerViewChildren
 id recycler_view
 id report_drawn
 id reverseSawtooth
@@ -3849,12 +3857,14 @@ layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout recycle_view_row
+layout recycle_view_row_child
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout splash_screen_view
 layout support_simple_spinner_dropdown_item
 menu main_activity_menu
+menu on_children_click_menu
 menu on_date_or_time_click_menu
 menu on_item_click_menu
 mipmap ic_launcher
@@ -3910,6 +3920,7 @@ string clear_text_end_icon_content_description
 string close_drawer
 string close_sheet
 string collapsed
+string create_subtask
 string date
 string date_input_headline
 string date_input_headline_description
@@ -3948,6 +3959,7 @@ string default_error_message
 string default_popup_window_title
 string delete
 string delete_all
+string delete_all_subtasks
 string delete_value
 string description
 string dialog
@@ -3956,6 +3968,7 @@ string edit_thing
 string edittext_title
 string error_a11y_label
 string error_icon_content_description
+string expand
 string expanded
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior

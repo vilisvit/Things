@@ -9,11 +9,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private final Context context;
     private static final String DATABASE_NAME = "ThingsDatabase.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 7;
 
     public static final String TABLE_NAME = "things";
     public static final String COLUMN_ID = "_id";
@@ -24,6 +26,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NOTIFICATION_TIME = "notification_time";
     public static final String COLUMN_PRIORITY = "thing_priority";
     public static final String COLUMN_STATUS = "thing_status";
+    public static final String COLUMN_PARENT_ID = "parent_id";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,7 +43,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_DATETIME + " DATETIME, " +
                 COLUMN_NOTIFICATION_TIME + " TINYTEXT, " +
                 COLUMN_PRIORITY + " INTEGER, " +                 // 0-Low, 1-Medium, 2-High
-                COLUMN_STATUS + " BOOL);";
+                COLUMN_STATUS + " BOOL, " +
+                COLUMN_PARENT_ID + " INTEGER);";
         db.execSQL(query);
     }
 
@@ -50,7 +54,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long addThing (String title, String description, String datetime, String notificationTime, int priority, boolean status) {
+    public long addThing (String title, String description, String datetime, String notificationTime, int priority, boolean status, String parent_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -60,6 +64,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_NOTIFICATION_TIME, notificationTime);
         cv.put(COLUMN_PRIORITY, priority);
         cv.put(COLUMN_STATUS, status);
+        cv.put(COLUMN_PARENT_ID, parent_id);
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1) {
             Toast.makeText(context, "Unable to add element", Toast.LENGTH_SHORT).show();
@@ -102,6 +107,22 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Unable to delete", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void deleteMultipleRows(ArrayList<String> ids) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Constructing the IN clause for string IDs
+        StringBuilder idList = new StringBuilder();
+        for (String id : ids) {
+            idList.append("'").append(id).append("',");
+        }
+        idList.deleteCharAt(idList.length() - 1); // Remove the trailing comma
+
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " IN (" + idList.toString() + ")";
+
+        db.execSQL(query);
+    }
+
     public void deleteAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
@@ -117,4 +138,56 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public int countChildren (String parent_id) {
+        return getChildrenIds(parent_id).size();
+    }
+
+    public ArrayList<String> getChildrenIds(String parent_id) {
+        ArrayList<String> children_ids = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String[] projection = {COLUMN_ID};
+
+        String selection = "parent_id=?";
+        String[] selectionArgs = {parent_id};
+
+        Cursor cursor = db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String child_id = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID));
+                children_ids.add(child_id);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        db.close();
+        return children_ids;
+    }
+
+    public Cursor readDataForIds(ArrayList<String> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return null; // Return null or handle the case where the ArrayList is empty
+        }
+
+        // Constructing the IN clause for string IDs
+        StringBuilder idList = new StringBuilder();
+        for (String id : ids) {
+            idList.append("'").append(id).append("',");
+        }
+        idList.deleteCharAt(idList.length() - 1); // Remove the trailing comma
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " IN (" + idList.toString() + ")";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = null;
+
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+
+        return cursor;
+    }
+
 }

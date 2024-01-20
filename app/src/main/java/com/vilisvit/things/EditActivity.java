@@ -41,11 +41,12 @@ import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.color.MaterialColors;
 
 import java.util.Calendar;
+import java.util.Set;
 
 public class EditActivity extends AppCompatActivity {
 
     EditText titleInput, descriptionInput, editDate, editTime;
-    String id, title, description, date="", time="", notification_time;
+    String id, title, description, date="", time="", notification_time, parent_id;
     int priority;
     boolean isThingCompleted;
 
@@ -62,6 +63,12 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        if (getIntent().hasExtra("parent_id")) {
+            parent_id = getIntent().getStringExtra("parent_id"); //necessary extra
+        } else {
+            Log.e("sus", "intent has no extra 'parent_id'");
+        }
 
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         titleInput = findViewById(R.id.editTextTitle);
@@ -294,7 +301,7 @@ public class EditActivity extends AppCompatActivity {
                     if (getIntent().hasExtra("id")) {
                         myDBHelper.updateData(id, titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority);
                     } else {
-                        id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority, false));
+                        id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority, false, parent_id));
                     }
 
                     notification_time = spinner.getSelectedItem().toString();
@@ -318,7 +325,7 @@ public class EditActivity extends AppCompatActivity {
                 if (getIntent().hasExtra("id")) {
                     myDBHelper.updateData(id, titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority);
                 } else {
-                    id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority, false));
+                    id = String.valueOf(myDBHelper.addThing(titleInput.getText().toString().trim(), descriptionInput.getText().toString().trim(), selectedDateTime, spinner.getSelectedItem().toString(), priority, false, parent_id));
                 }
                 Intent intent = new Intent(EditActivity.this, MainActivity.class);
                 startActivity(intent);

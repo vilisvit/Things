@@ -13,6 +13,8 @@
         <item name="toolbarStyle">@style/Base.Theme.Things.Toolbar</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Night</item>
         <item name="backgroundTint">@color/white</item>
+        <item name="colorSecondaryContainer">@color/dark_green</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
     </style>
     <style name="Base.Theme.Things.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:background">@color/main_dark_green</item>

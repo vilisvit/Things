@@ -20,4 +20,6 @@
     <string name="middle">Middle</string>
     <string name="high">High</string>
     <string name="expand">Expand</string>
+    <string name="create_subtask">Create subtask</string>
+    <string name="delete_all_subtasks">Delete all subtasks</string>
 </resources>

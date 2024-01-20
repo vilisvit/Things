@@ -1,5 +1,7 @@
 R_DEF: Internal format may change without notice
 local
+anim nested_recycleview_down
+anim nested_recycleview_up
 animator logo_bottom_element_animator
 animator logo_middle_element_1_animator
 animator logo_middle_element_2_animator
@@ -37,21 +39,26 @@ color text_color_selector_white
 color white
 color white_gray
 drawable animated_logo
+drawable arrow_down
+drawable arrow_up
 drawable ic_add
 drawable logo
 id add_button
 id checkBox
+id create_child_option
 id datePicker
 id dateStaticText
 id datesTimesConstraintLayout
 id deadlineDateText
 id deadlineTextView
 id delete_all_option
+id delete_children_option
 id delete_date_or_time_option
 id delete_option
 id descriptionText
 id editTextDescription
 id editTextTitle
+id expandButton
 id highPriorityButton
 id itemConstraintLayout
 id linearLayout
@@ -66,6 +73,7 @@ id notificationTextView
 id priorityIndicationLine
 id priorityTextView
 id priorityToggleButton
+id recyclerViewChildren
 id recycler_view
 id save_button
 id separatorLine1
@@ -75,7 +83,9 @@ id titleText
 layout activity_edit
 layout activity_main
 layout recycle_view_row
+layout recycle_view_row_child
 menu main_activity_menu
+menu on_children_click_menu
 menu on_date_or_time_click_menu
 menu on_item_click_menu
 mipmap ic_launcher
@@ -84,15 +94,18 @@ mipmap ic_launcher_round
 string add_button_description
 string added
 string app_name
+string create_subtask
 string date
 string deadline
 string deadline_in_edit_view
 string delete
 string delete_all
+string delete_all_subtasks
 string delete_value
 string description
 string edit_thing
 string edittext_title
+string expand
 string high
 string low
 string middle

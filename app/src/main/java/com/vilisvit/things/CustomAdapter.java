@@ -8,6 +8,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -30,18 +34,29 @@ import java.util.Calendar;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private final Context context;
-    private final ArrayList ids, titles, descriptions, datetimes, notification_times, priorities, statuses;
+    MyViewHolder holderParent;
+    CustomAdapter parentRecyclerViewAdapter;
+    private final ArrayList ids, titles, descriptions, datetimes, notification_times, priorities, statuses, parent_ids;
     private String highlighted_element_id;
 
+    private int row_layout_id;
+
     CustomAdapter (Context context,
+                   int row_layout_id,
+                   MyViewHolder holderParent,
+                   CustomAdapter parentRecyclerViewAdapter,
                    ArrayList ids,
                    ArrayList titles,
                    ArrayList descriptions,
                    ArrayList datetimes,
                    ArrayList notification_times,
                    ArrayList priorities,
-                   ArrayList statuses) {
+                   ArrayList statuses,
+                   ArrayList parent_ids) {
         this.context = context;
+        this.row_layout_id = row_layout_id;
+        this.holderParent = holderParent;
+        this.parentRecyclerViewAdapter = parentRecyclerViewAdapter;
         this.ids = ids;
         this.titles = titles;
         this.descriptions = descriptions;
@@ -49,9 +64,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.notification_times = notification_times;
         this.priorities = priorities;
         this.statuses = statuses;
+        this.parent_ids = parent_ids;
     }
 
     CustomAdapter (Context context,
+                   int row_layout_id,
+                   MyViewHolder holderParent,
+                   CustomAdapter parentRecyclerViewAdapter,
                    ArrayList ids,
                    ArrayList titles,
                    ArrayList descriptions,
@@ -59,8 +78,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                    ArrayList notification_times,
                    ArrayList statuses,
                    ArrayList priorities,
+                   ArrayList parent_ids,
                    String highlighted_element_id) {
         this.context = context;
+        this.row_layout_id = row_layout_id;
+        this.holderParent = holderParent;
+        this.parentRecyclerViewAdapter = parentRecyclerViewAdapter;
         this.ids = ids;
         this.titles = titles;
         this.descriptions = descriptions;
@@ -68,6 +91,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.notification_times = notification_times;
         this.priorities = priorities;
         this.statuses = statuses;
+        this.parent_ids = parent_ids;
         this.highlighted_element_id = highlighted_element_id;
     }
 
@@ -77,10 +101,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recycle_view_row, parent, false);
+        View view = inflater.inflate(row_layout_id, parent, false);
         return new MyViewHolder(view);
     }
 
+    @SuppressLint("Range")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if ((Boolean) statuses.get(position)) {
@@ -114,6 +139,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("notification_time", String.valueOf(notification_times.get(position)));
                 intent.putExtra("priority", (Integer) priorities.get(position));
                 intent.putExtra("status", (Boolean) statuses.get(position));
+                intent.putExtra("parent_id", String.valueOf(parent_ids.get(position)));
                 context.startActivity(intent);
             }
         });
@@ -127,11 +153,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                         if (item.getItemId() == R.id.delete_option) {
                             confirmDialogDeleting(position);
                             return true;
+                        } else if (item.getItemId() == R.id.create_child_option) {
+                            Intent intent = new Intent(context, EditActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("parent_id", String.valueOf(ids.get(position)));
+                            context.startActivity(intent);
+                            return true;
+                        } else if (item.getItemId() == R.id.delete_children_option) {
+                            confirmDialogDeletingChildren(position);
+                            return true;
                         }
                         return false;
                     }
                 });
-                popupMenu.inflate(R.menu.on_item_click_menu);
+                if (parentRecyclerViewAdapter == null) {
+                    popupMenu.inflate(R.menu.on_item_click_menu);
+                } else {
+                    popupMenu.inflate(R.menu.on_children_click_menu);
+                }
                 popupMenu.show();
                 return true;
             }
@@ -168,6 +207,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 }
             }
         });
+        if (holder.expand_button != null) {
+            holder.expand_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.recycler_view_children.getVisibility() == View.VISIBLE) {
+                        holder.expand_button.animate().rotation(180).setDuration(200).start();
+                        holder.recycler_view_children.setVisibility(View.GONE);
+                        notifyItemChanged(position);
+                    } else {
+                        holder.expand_button.animate().rotation(0).setDuration(200).start();
+                        holder.recycler_view_children.setVisibility(View.VISIBLE);
+                        notifyItemChanged(position);
+                    }
+                }
+            });
+        }
+
         if (ids.get(position).equals(highlighted_element_id)) {
             highlightItemView(holder.itemConstraintLayout);
         }
@@ -181,6 +237,39 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             case 2:
                 holder.priority_indication_line.setBackgroundColor(ContextCompat.getColor(context, R.color.high_priority));
                 break;
+        }
+        MyDatabaseHelper myDBHelper = new MyDatabaseHelper(context);
+        if (holder.recycler_view_children != null) {
+            if (myDBHelper.countChildren(String.valueOf(ids.get(position))) > 0) {
+                ArrayList<String> children_ids = myDBHelper.getChildrenIds(String.valueOf(ids.get(position)));
+                ArrayList<String> children_titles = new ArrayList<String>();
+                ArrayList<String> children_descriptions = new ArrayList<String>();
+                ArrayList<String> children_datetimes = new ArrayList<String>();
+                ArrayList<String> children_notification_times = new ArrayList<String>();
+                ArrayList<Integer> children_priorities = new ArrayList<Integer>();
+                ArrayList<Boolean> children_statuses = new ArrayList<Boolean>();
+                ArrayList<String> children_parent_ids = new ArrayList<String>();
+
+                Cursor cursor = myDBHelper.readDataForIds(children_ids);
+                cursor.moveToFirst();
+                do {
+                    children_titles.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_TITLE)));
+                    children_descriptions.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_DESCRIPTION)));
+                    children_datetimes.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_DATETIME)));
+                    children_notification_times.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_NOTIFICATION_TIME)));
+                    children_priorities.add(cursor.getInt(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_PRIORITY)));
+                    children_statuses.add(cursor.getInt(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_STATUS)) > 0);
+                    children_parent_ids.add(cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_PARENT_ID)));
+                } while (cursor.moveToNext());
+
+                CustomAdapter childrenAdapter = new CustomAdapter(context, R.layout.recycle_view_row_child, holder, CustomAdapter.this, children_ids, children_titles, children_descriptions, children_datetimes, children_notification_times, children_priorities, children_statuses, children_parent_ids);
+
+                holder.recycler_view_children.setAdapter(childrenAdapter);
+                holder.recycler_view_children.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                holder.recycler_view_children.setVisibility(View.GONE);
+                holder.expand_button.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -200,20 +289,42 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 datetimes.remove(position);
                 notification_times.remove(position);
                 statuses.remove(position);
+                parent_ids.remove(position);
+
+                if (parentRecyclerViewAdapter != null) {
+                    if (ids.size() == 0) {
+                        holderParent.recycler_view_children.setVisibility(View.GONE);
+                        holderParent.expand_button.setVisibility(View.GONE);
+                    }
+                    parentRecyclerViewAdapter.notifyItemChanged(holderParent.getAdapterPosition());
+                }
 
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, getItemCount());
-                if (getItemCount() == 0) {
-                    MainActivity mainActivity = (MainActivity) context;
-                    mainActivity.noData.setVisibility(View.VISIBLE);
-                }
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {}
+        });
+        builder.create().show();
+    }
 
+    void confirmDialogDeletingChildren (int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Delete all subtasks of " + titles.get(position) + "?");
+        builder.setMessage("Are you sure you want to delete all subtasks" + titles.get(position) + "?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MyDatabaseHelper myDB = new MyDatabaseHelper(context);
+                myDB.deleteMultipleRows(myDB.getChildrenIds(String.valueOf(ids.get(position))));
+                notifyItemChanged(position);
             }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {}
         });
         builder.create().show();
     }
@@ -229,6 +340,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         CheckBox status_checkbox;
         LinearLayout mainLayout;
         ConstraintLayout itemConstraintLayout, datesTimesConstraintLayout;
+        RecyclerView recycler_view_children;
+        public ImageButton expand_button;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title_text = itemView.findViewById(R.id.titleText);
@@ -240,6 +353,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             mainLayout = itemView.findViewById(R.id.mainLayout);
             itemConstraintLayout = itemView.findViewById(R.id.itemConstraintLayout);
             datesTimesConstraintLayout = itemView.findViewById(R.id.datesTimesConstraintLayout);
+            recycler_view_children = itemView.findViewById(R.id.recyclerViewChildren);
+            expand_button = itemView.findViewById(R.id.expandButton);
         }
     }
 
