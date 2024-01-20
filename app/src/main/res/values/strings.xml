@@ -19,4 +19,5 @@
     <string name="low">Low</string>
     <string name="middle">Middle</string>
     <string name="high">High</string>
+    <string name="expand">Expand</string>
 </resources>
