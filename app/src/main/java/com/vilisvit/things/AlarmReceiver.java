@@ -46,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelID);
             if (notificationChannel == null) {
                 int importance = NotificationManager.IMPORTANCE_HIGH;
-                notificationChannel = new NotificationChannel(channelID, "Some description", importance);
+                notificationChannel = new NotificationChannel(channelID, "All", importance);
                 notificationChannel.setLightColor(Color.GREEN);
                 notificationChannel.enableVibration(true);
                 notificationManager.createNotificationChannel(notificationChannel);

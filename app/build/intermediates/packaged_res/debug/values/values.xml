@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="notification_times_array">
-        <item>Never</item>
-        <item>in 1 hour</item>
-        <item>in 6 hours</item>
-        <item>in 1 day</item>
-        <item>in 3 days</item>
-        <item>in 1 week</item>
-        <item>in 1 month</item>
+        <item>@string/spinner_option_never</item>
+        <item>@string/spinner_option_at_deadline</item>
+        <item>@string/spinner_option_in_1_hour</item>
+        <item>@string/spinner_option_in_6_hours</item>
+        <item>@string/spinner_option_in_1_day</item>
+        <item>@string/spinner_option_in_3_days</item>
+        <item>@string/spinner_option_in_1_week</item>
+        <item>@string/spinner_option_in_1_month</item>
     </string-array>
     <color name="alpha_gray_black">#80000000</color>
     <color name="alpha_gray_white">#80FFFFFF</color>
@@ -39,14 +40,23 @@
     <color name="white_gray">#F4F4F4</color>
     <string name="add_button_description">add</string>
     <string name="added">Added:</string>
+    <string name="alarm_permission_request_message">To use notifications you should allow schedule alarm permission in settings</string>
+    <string name="alarm_permission_request_title">Permission required</string>
     <string name="app_name">Things</string>
+    <string name="cancel">Cancel</string>
     <string name="create_subtask">Create subtask</string>
     <string name="date">Date</string>
     <string name="deadline">Deadline:</string>
-    <string name="deadline_in_edit_view">Deadline</string>
+    <string name="deadline_in_edit_view">Deadline:</string>
     <string name="delete">Delete</string>
     <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Are you sure you want to delete all things?</string>
     <string name="delete_all_subtasks">Delete all subtasks</string>
+    <string name="delete_all_title">Delete all?</string>
+    <string name="delete_one_message">Are you sure you want to delete</string>
+    <string name="delete_one_title">Delete</string>
+    <string name="delete_subtasks_message">Are you sure you want to delete all subtasks of</string>
+    <string name="delete_subtasks_title">Delete all subtasks of</string>
     <string name="delete_value">Delete value</string>
     <string name="description">Description</string>
     <string name="edit_thing">Edit thing</string>
@@ -55,11 +65,25 @@
     <string name="high">High</string>
     <string name="low">Low</string>
     <string name="middle">Middle</string>
+    <string name="no">No</string>
     <string name="no_things">No things to do yet</string>
     <string name="notification">Notification:</string>
+    <string name="notifications_request_message">You should allow sending notifications for this app</string>
+    <string name="notifications_request_title">Permission required</string>
+    <string name="ok">OK</string>
     <string name="priority">Priority:</string>
     <string name="save">Save</string>
+    <string name="spinner_option_at_deadline">at deadline</string>
+    <string name="spinner_option_in_1_day">in 1 day</string>
+    <string name="spinner_option_in_1_hour">in 1 hour</string>
+    <string name="spinner_option_in_1_month">in 1 month</string>
+    <string name="spinner_option_in_1_week">in 1 week</string>
+    <string name="spinner_option_in_3_days">in 3 days</string>
+    <string name="spinner_option_in_6_hours">in 6 hour</string>
+    <string name="spinner_option_never">Never</string>
     <string name="time">Time</string>
+    <string name="title_is_required">Title is required</string>
+    <string name="yes">Yes</string>
     <style name="Base.Theme.Things" parent="Theme.Material3.Light">
         <item name="colorPrimary">@color/main_green</item>
         <item name="colorOnPrimary">@color/white</item>

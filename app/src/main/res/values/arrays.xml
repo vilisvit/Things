@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="notification_times_array">
-        <item>Never</item>
-        <item>in 1 hour</item>
-        <item>in 6 hours</item>
-        <item>in 1 day</item>
-        <item>in 3 days</item>
-        <item>in 1 week</item>
-        <item>in 1 month</item>
+        <item>@string/spinner_option_never</item>
+        <item>@string/spinner_option_at_deadline</item>
+        <item>@string/spinner_option_in_1_hour</item>
+        <item>@string/spinner_option_in_6_hours</item>
+        <item>@string/spinner_option_in_1_day</item>
+        <item>@string/spinner_option_in_3_days</item>
+        <item>@string/spinner_option_in_1_week</item>
+        <item>@string/spinner_option_in_1_month</item>
     </string-array>
 </resources>

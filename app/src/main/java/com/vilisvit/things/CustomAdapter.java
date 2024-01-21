@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -27,10 +26,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Objects;
+import java.util.Collections;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
@@ -181,7 +181,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     }
                 });
                 if (parentRecyclerViewAdapter == null) {
-                    popupMenu.inflate(R.menu.on_item_click_menu);
+                    MyDatabaseHelper myDBHelper = new MyDatabaseHelper(context);
+                    if (myDBHelper.countChildren(ids.get(position)) > 0) {
+                        popupMenu.inflate(R.menu.on_item_click_menu);
+                    } else {
+                        popupMenu.inflate(R.menu.on_item_click_menu_no_subtasks);
+                    }
                 } else {
                     popupMenu.inflate(R.menu.on_children_click_menu);
                 }
@@ -189,9 +194,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 return true;
             }
         });
-        holder.status_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.status_checkbox.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
+                boolean isChecked = ((CheckBox)v).isChecked();
                 MyDatabaseHelper myDBHelper = new MyDatabaseHelper(context);
                 myDBHelper.updateStatus(String.valueOf(ids.get(position)), isChecked);
                 statuses.set(position, isChecked);
@@ -218,6 +225,29 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                             alarmHelper.startAlarm(alarmDatetime, String.valueOf(ids.get(position)), String.valueOf(titles.get(position)), String.valueOf(datetimes.get(position)).trim(), priorities.get(position));
                         }
                     }
+                }
+
+                if (parent_ids.get(position).equals("-1")) { //if is parent element
+                    //(un)check all children
+                    String[] children_ids = myDBHelper.getChildrenIds(ids.get(position)).toArray(new String[0]);
+                    for (String child_id : children_ids) {
+                        myDBHelper.updateStatus(child_id, isChecked);
+                    }
+                    CustomAdapter childAdapter = (CustomAdapter) holder.recycler_view_children.getAdapter();
+                    Collections.fill(childAdapter.statuses, isChecked);
+                    holder.recycler_view_children.getAdapter().notifyItemRangeChanged(0, myDBHelper.countChildren(ids.get(position)));
+                } else {
+                    //check all children of parent if all has the same status check parent to it
+                    String[] children_ids = myDBHelper.getChildrenIds(parent_ids.get(position)).toArray(new String[0]);
+                    boolean all_true = true;
+                    for (String child_id : children_ids) {
+                        if (!myDBHelper.getStatus(child_id)) {
+                            all_true = false;
+                        }
+                    }
+                    myDBHelper.updateStatus(parent_ids.get(position), all_true);
+                    parentRecyclerViewAdapter.statuses.set(holderParent.getAdapterPosition(), all_true);
+                    parentRecyclerViewAdapter.notifyItemChanged(holderParent.getAdapterPosition());
                 }
             }
         });
@@ -291,6 +321,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
                 holder.recycler_view_children.setLayoutManager(new LinearLayoutManager(context));
                 holder.recycler_view_children.setAdapter(childrenAdapter);
+                ((SimpleItemAnimator) holder.recycler_view_children.getItemAnimator()).setSupportsChangeAnimations(false);
             } else {
                 holder.recycler_view_children.setVisibility(View.GONE);
                 holder.expand_button.setVisibility(View.GONE);
@@ -300,9 +331,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     void confirmDialogDeleting (int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Delete " + titles.get(position) + "?");
-        builder.setMessage("Are you sure you want to delete " + titles.get(position) + "?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle(context.getResources().getString(R.string.delete_one_title) + " " + titles.get(position) + "?");
+        builder.setMessage(context.getResources().getString(R.string.delete_one_message) + " " + titles.get(position) + "?");
+        builder.setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(context);
@@ -328,15 +359,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 notifyItemRangeChanged(position, getItemCount());
             }
         });
-        builder.setNegativeButton("No", (dialog, which) -> {});
+        builder.setNegativeButton(context.getResources().getString(R.string.no), (dialog, which) -> {});
         builder.create().show();
     }
 
     void confirmDialogDeletingChildren (int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Delete all subtasks of " + titles.get(position) + "?");
-        builder.setMessage("Are you sure you want to delete all subtasks" + titles.get(position) + "?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle(context.getResources().getString(R.string.delete_subtasks_title) + " " + titles.get(position) + "?");
+        builder.setMessage(context.getResources().getString(R.string.delete_subtasks_message) + " " + titles.get(position) + "?");
+        builder.setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(context);
@@ -344,7 +375,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 notifyItemChanged(position);
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {}
         });

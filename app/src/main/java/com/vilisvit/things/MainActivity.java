@@ -109,15 +109,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.delete_all_option) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Delete all?");
-            builder.setMessage("Are you sure you want to delete all things?");
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setTitle(getResources().getString(R.string.delete_all_title));
+            builder.setMessage(getResources().getString(R.string.delete_all_message));
+            builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     customAdapter.deleteAllData();
                 }
             });
-            builder.setNegativeButton("No", (dialog, which) -> {
+            builder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
 
             });
             builder.create().show();

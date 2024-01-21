@@ -101,6 +101,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    @SuppressLint("Range")
+    public boolean getStatus(String row_id) {
+        ArrayList<String> ids = new ArrayList<>();
+        ids.add(row_id);
+        Cursor cursor = readDataForIds(ids);
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_STATUS)) > 0;
+    }
+
     public void deleteOneRow(String row_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});

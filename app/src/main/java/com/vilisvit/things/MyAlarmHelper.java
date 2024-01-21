@@ -42,26 +42,18 @@ public class MyAlarmHelper {
         alarmDatetime.set(Calendar.MINUTE, minute);
         alarmDatetime.set(Calendar.SECOND, 0);
 
-        switch (delay) {
-            case "in 1 hour":
-                alarmDatetime.add(Calendar.HOUR_OF_DAY, -1);
-                break;
-            case "in 6 hours":
-                alarmDatetime.add(Calendar.HOUR_OF_DAY, -6);
-                break;
-            case "in 1 day":
-                alarmDatetime.add(Calendar.DAY_OF_MONTH, -1);
-                break;
-            case "in 3 days":
-                alarmDatetime.add(Calendar.DAY_OF_MONTH, -3);
-                break;
-            case "in 1 week":
-                alarmDatetime.add(Calendar.WEEK_OF_YEAR, -1);
-                break;
-            case "in 1 month":
-                alarmDatetime.add(Calendar.MONTH, -1);
-                break;
-
+        if (delay.equals(context.getResources().getString(R.string.spinner_option_in_1_hour))) {
+            alarmDatetime.add(Calendar.HOUR_OF_DAY, -1);
+        } else if (delay.equals(context.getResources().getString(R.string.spinner_option_in_6_hours))) {
+            alarmDatetime.add(Calendar.HOUR_OF_DAY, -6);
+        } else if (delay.equals(context.getResources().getString(R.string.spinner_option_in_1_day))) {
+            alarmDatetime.add(Calendar.DAY_OF_MONTH, -1);
+        } else if (delay.equals(context.getResources().getString(R.string.spinner_option_in_3_days))) {
+            alarmDatetime.add(Calendar.DAY_OF_MONTH, -3);
+        } else if (delay.equals(context.getResources().getString(R.string.spinner_option_in_1_week))) {
+            alarmDatetime.add(Calendar.WEEK_OF_YEAR, -1);
+        } else if (delay.equals(context.getResources().getString(R.string.spinner_option_in_1_month))) {
+            alarmDatetime.add(Calendar.MONTH, -1);
         }
 
         //Toast.makeText(context, "Notification will be shown at: " + alarmDatetime.getTime(), Toast.LENGTH_SHORT).show();
@@ -77,7 +69,7 @@ public class MyAlarmHelper {
         intent.putExtra("priority", priority);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, Integer.parseInt(id), intent, PendingIntent.FLAG_MUTABLE);
-        if (Build.VERSION.SDK_INT >= 31 && alarmManager.canScheduleExactAlarms()) {
+        if (Build.VERSION.SDK_INT < 31 || alarmManager.canScheduleExactAlarms()) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             Log.d("alarm", "alarm successfully set to:" + calendar.getTime());
         } else {

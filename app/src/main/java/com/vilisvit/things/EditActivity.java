@@ -158,7 +158,6 @@ public class EditActivity extends AppCompatActivity {
                         EditActivity.this,
                         R.style.CustomDateTimePickerDialogStyle,
                         new TimePickerDialog.OnTimeSetListener() {
-                            @SuppressLint({"SetTextI18n", "DefaultLocale"})
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 editTime.setText(String.format("%02d:%02d", hourOfDay, minute));
@@ -219,7 +218,7 @@ public class EditActivity extends AppCompatActivity {
         if (getIntent().hasExtra("id")) {
             getIntentData();
             if (!notification_time.equals(getResources().getStringArray(R.array.notification_times_array)[0])) {
-                MyAlarmHelper alarmHelper = new MyAlarmHelper(this, alarmManager);
+                MyAlarmHelper alarmHelper = new MyAlarmHelper(EditActivity.this, alarmManager);
                 alarmHelper.cancelAlarm(id, titleInput.getText().toString().trim(), selectedDateTime);
             }
         }
@@ -227,8 +226,8 @@ public class EditActivity extends AppCompatActivity {
 
     private boolean allFieldsAreCorrect() {
         if (titleInput.getText().toString().trim().isEmpty()){
-            titleInput.setError("Title is required");
-            titleInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.red)));
+            titleInput.setError(getResources().getString(R.string.title_is_required));
+            titleInput.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditActivity.this, R.color.red)));
             return false;
         }
         return  true;
@@ -349,10 +348,10 @@ public class EditActivity extends AppCompatActivity {
     private void grantPermissions() {
         if (Build.VERSION.SDK_INT >= 31 && !alarmManager.canScheduleExactAlarms()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("To use notifications you should allow schedule alarm permission in settings")
-                    .setTitle("Permission required")
+            builder.setMessage(getResources().getString(R.string.alarm_permission_request_message))
+                    .setTitle(getResources().getString(R.string.alarm_permission_request_title))
                     .setCancelable(false)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -364,7 +363,7 @@ public class EditActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -377,17 +376,17 @@ public class EditActivity extends AppCompatActivity {
                 Log.d("permissions", "Post notification permission already granted");
             } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("You should allow notification for this app")
-                        .setTitle("Permission required")
+                builder.setMessage(getResources().getString(R.string.notifications_request_message))
+                        .setTitle(getResources().getString(R.string.notifications_request_title))
                         .setCancelable(false)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ActivityCompat.requestPermissions(EditActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, POST_NOTIFICATIONS_REQUEST_CODE);
                                 dialog.dismiss();
                             }
                         })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
