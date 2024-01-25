@@ -1,4 +1,4 @@
-#Sun Jan 21 16:54:02 CET 2024
+#Thu Jan 25 22:44:38 CET 2024
 base.0=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        noData=findViewById(R.id.noDataTextview);
+        noData = findViewById(R.id.noDataTextview);
         FloatingActionButton floatingActionButton = findViewById(R.id.add_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

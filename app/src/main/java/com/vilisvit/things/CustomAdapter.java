@@ -35,6 +35,7 @@ import java.util.Collections;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private final Context context;
+    MainActivity mainActivity;
     MyViewHolder holderParent;
     CustomAdapter parentRecyclerViewAdapter;
     RecyclerView recyclerView;
@@ -58,6 +59,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                    ArrayList<Boolean> statuses,
                    ArrayList<String> parent_ids) {
         this.context = context;
+        mainActivity = (MainActivity) context;
         this.row_layout_id = row_layout_id;
         this.holderParent = holderParent;
         this.parentRecyclerViewAdapter = parentRecyclerViewAdapter;
@@ -85,6 +87,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                    ArrayList<String> parent_ids,
                    String highlighted_element_id) {
         this.context = context;
+        mainActivity = (MainActivity) context;
         this.row_layout_id = row_layout_id;
         this.holderParent = holderParent;
         this.parentRecyclerViewAdapter = parentRecyclerViewAdapter;
@@ -230,12 +233,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 if (parent_ids.get(position).equals("-1")) { //if is parent element
                     //(un)check all children
                     String[] children_ids = myDBHelper.getChildrenIds(ids.get(position)).toArray(new String[0]);
-                    for (String child_id : children_ids) {
-                        myDBHelper.updateStatus(child_id, isChecked);
+                    if (children_ids.length > 0) {
+                        for (String child_id : children_ids) {
+                            myDBHelper.updateStatus(child_id, isChecked);
+                        }
+                        CustomAdapter childAdapter = (CustomAdapter) holder.recycler_view_children.getAdapter();
+                        Collections.fill(childAdapter.statuses, isChecked);
+                        holder.recycler_view_children.getAdapter().notifyItemRangeChanged(0, myDBHelper.countChildren(ids.get(position)));
                     }
-                    CustomAdapter childAdapter = (CustomAdapter) holder.recycler_view_children.getAdapter();
-                    Collections.fill(childAdapter.statuses, isChecked);
-                    holder.recycler_view_children.getAdapter().notifyItemRangeChanged(0, myDBHelper.countChildren(ids.get(position)));
                 } else {
                     //check all children of parent if all has the same status check parent to it
                     String[] children_ids = myDBHelper.getChildrenIds(parent_ids.get(position)).toArray(new String[0]);
@@ -357,6 +362,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, getItemCount());
+                if (ids.size() == 0) {
+                    mainActivity.noData.setVisibility(View.VISIBLE);
+                }
             }
         });
         builder.setNegativeButton(context.getResources().getString(R.string.no), (dialog, which) -> {});
@@ -428,7 +436,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         notification_times.clear();
         priorities.clear();
         statuses.clear();
-        MainActivity mainActivity = (MainActivity) context;
         mainActivity.noData.setVisibility(View.VISIBLE);
     }
 }
