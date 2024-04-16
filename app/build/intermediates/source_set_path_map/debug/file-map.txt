@@ -47,10 +47,10 @@ com.vilisvit.things.app-lifecycle-viewmodel-ktx-2.6.1-45 C:\Users\Vitalii\.gradl
 com.vilisvit.things.app-activity-1.8.0-46 C:\Users\Vitalii\.gradle\caches\transforms-3\ee379e153f931d031e8077414a4159d3\transformed\activity-1.8.0\res
 com.vilisvit.things.app-drawerlayout-1.1.1-47 C:\Users\Vitalii\.gradle\caches\transforms-3\f4a19759edf77e5735777fc43dbb02ec\transformed\drawerlayout-1.1.1\res
 com.vilisvit.things.app-ui-geometry-1.4.1-48 C:\Users\Vitalii\.gradle\caches\transforms-3\fff79474fc6b314f554c958f39407c24\transformed\ui-geometry-1.4.1\res
-com.vilisvit.things.app-pngs-49 D:\Personal\Vitalii\AndroidStudio\Things\app\build\generated\res\pngs\debug
-com.vilisvit.things.app-resValues-50 D:\Personal\Vitalii\AndroidStudio\Things\app\build\generated\res\resValues\debug
-com.vilisvit.things.app-packageDebugResources-51 D:\Personal\Vitalii\AndroidStudio\Things\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.vilisvit.things.app-packageDebugResources-52 D:\Personal\Vitalii\AndroidStudio\Things\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.vilisvit.things.app-merged_res-53 D:\Personal\Vitalii\AndroidStudio\Things\app\build\intermediates\merged_res\debug
-com.vilisvit.things.app-debug-54 D:\Personal\Vitalii\AndroidStudio\Things\app\src\debug\res
-com.vilisvit.things.app-main-55 D:\Personal\Vitalii\AndroidStudio\Things\app\src\main\res
+com.vilisvit.things.app-pngs-49 D:\Personal\my_programs\AndroidStudio\Things\app\build\generated\res\pngs\debug
+com.vilisvit.things.app-resValues-50 D:\Personal\my_programs\AndroidStudio\Things\app\build\generated\res\resValues\debug
+com.vilisvit.things.app-packageDebugResources-51 D:\Personal\my_programs\AndroidStudio\Things\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.vilisvit.things.app-packageDebugResources-52 D:\Personal\my_programs\AndroidStudio\Things\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.vilisvit.things.app-merged_res-53 D:\Personal\my_programs\AndroidStudio\Things\app\build\intermediates\merged_res\debug
+com.vilisvit.things.app-debug-54 D:\Personal\my_programs\AndroidStudio\Things\app\src\debug\res
+com.vilisvit.things.app-main-55 D:\Personal\my_programs\AndroidStudio\Things\app\src\main\res

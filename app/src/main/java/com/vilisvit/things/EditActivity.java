@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import android.Manifest;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.color.MaterialColors;
 
@@ -64,8 +65,6 @@ public class EditActivity extends AppCompatActivity {
 
         if (getIntent().hasExtra("parent_id")) {
             parent_id = getIntent().getStringExtra("parent_id"); //necessary extra
-        } else {
-            Log.e("sus", "intent has no extra 'parent_id'");
         }
 
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -250,6 +249,27 @@ public class EditActivity extends AppCompatActivity {
                 }
             }
             notification_time = getIntent().getStringExtra("notification_time");
+
+            MaterialButton LPBtn = findViewById(R.id.lowPriorityButton);
+            MaterialButton MPBtn = findViewById(R.id.mediumPriorityButton);
+            MaterialButton HPBtn = findViewById(R.id.highPriorityButton);
+            switch (priority) {
+                case 0:
+                    LPBtn.setChecked(true);
+                    MPBtn.setChecked(false);
+                    HPBtn.setChecked(false);
+                    break;
+                case 1:
+                    LPBtn.setChecked(false);
+                    MPBtn.setChecked(true);
+                    HPBtn.setChecked(false);
+                    break;
+                case 2:
+                    LPBtn.setChecked(false);
+                    MPBtn.setChecked(false);
+                    HPBtn.setChecked(true);
+                    break;
+            }
 
             titleInput.setText(title);
             descriptionInput.setText(description);

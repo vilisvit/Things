@@ -1,8 +1,8 @@
-#Thu Jan 25 22:48:11 CET 2024
-base.0=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.3=D\:\\Personal\\Vitalii\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Tue Apr 16 16:47:12 CEST 2024
+base.0=D\:\\Personal\\my_programs\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=D\:\\Personal\\my_programs\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=D\:\\Personal\\my_programs\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.3=D\:\\Personal\\my_programs\\AndroidStudio\\Things\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=6/classes.dex
